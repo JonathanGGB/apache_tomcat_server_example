@@ -1,0 +1,13 @@
+javac -cp "lib/servlet-api.jar" -d build src/com/example/HelloServlet.java
+cp -r web/* build/
+mkdir -p build/WEB-INF/classes
+cp -r build/com build/WEB-INF/classes/
+jar cvf HelloWorld.war -C build .
+copy HelloWorld.war apache-tomcat-9.0.89\webapps
+apache-tomcat-9.0.89\bin\.\startup.bat
+
+
+docker build -t tomcat_example .
+docker run -d -p 8080:8080 tomcat_example
+
+ELIMINAR DEL SERVER.XML <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
